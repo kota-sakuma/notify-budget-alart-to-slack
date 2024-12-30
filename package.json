@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.4",
+    "npm": "^11.0.0"
+  },
+  "name": "notify-budget-alart-to-slack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && functions-framework --source=build --target=helloWorld"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
