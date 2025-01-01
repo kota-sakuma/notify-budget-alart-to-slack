@@ -3,7 +3,7 @@
     "@google-cloud/functions-framework": "^3.4.4",
     "npm": "^11.0.0"
   },
-  "name": "notify-budget-alart-to-slack",
+  "name": "notify-budget-alert-to-slack",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
