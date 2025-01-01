@@ -1,0 +1,34 @@
+services:
+  firestore-emulator:
+    image: "google/cloud-sdk:latest"
+    container_name: firestore-emulator
+    command: >
+      gcloud beta emulators firestore start
+      --host-port=0.0.0.0:8084
+    ports:
+      - "8084:8084"
+    environment:
+      - FIRESTORE_PROJECT_ID=test-project
+    volumes:
+      - "firestore_data:/data"
+    networks:
+      - emulator-network
+  pubsub-emulator:
+    image: "google/cloud-sdk:latest"
+    container_name: pubsub-emulator
+    command: >
+      gcloud beta emulators pubsub start
+      --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    environment:
+      - PUBSUB_PROJECT_ID=test-project
+    volumes:
+      - "pubsub_data:/data"
+    networks:
+      - emulator-network
+volumes:
+  firestore_data:
+  pubsub_data:
+networks:
+  emulator-network:
