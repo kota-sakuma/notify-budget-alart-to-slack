@@ -5,3 +5,8 @@
 ### Build ###
 build/
 node_modules/
+
+### Terraform ###
+*.terraform/
+*.tfstate
+*.tfvars
