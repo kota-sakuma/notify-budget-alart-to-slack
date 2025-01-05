@@ -3,7 +3,7 @@
 *.vscode/
 
 ### Build ###
-build/
+dist/
 node_modules/
 
 ### Terraform ###
