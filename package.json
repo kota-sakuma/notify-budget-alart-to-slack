@@ -1,10 +1,10 @@
 {
   "name": "notify-budget-alert-to-slack",
   "version": "1.0.0",
-  "description": "Cloud Function to notify budget alerts to Slack",
-  "main": "build/index.js",
+  "description": "Cloud Run Function to notify budget alerts to Slack",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc",
     "start": "npm run build && functions-framework --target=notifySlack"
   },
@@ -14,11 +14,14 @@
   },
   "devDependencies": {
     "@google-cloud/functions-framework": "^3.4.4",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kota Sakuma",
   "license": "ISC"
 }

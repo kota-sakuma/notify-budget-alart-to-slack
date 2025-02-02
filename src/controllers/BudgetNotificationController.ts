@@ -10,9 +10,6 @@ export class BudgetNotificationController {
 
   async handlePubSubEvent(pubsubEvent: any): Promise<void> {
     try {
-      // TODO: Remove this log statement.
-      console.log('Received PubSub event:', pubsubEvent.data);
-
       // Decode the PubSub Message.
       const pubsubData: BudgetNotification = JSON.parse(
         Buffer.from(pubsubEvent.data, 'base64').toString('utf-8')
