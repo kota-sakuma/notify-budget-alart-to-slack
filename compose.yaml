@@ -1,28 +1,34 @@
 services:
   firestore-emulator:
-    image: "google/cloud-sdk:latest"
+    image: "google/cloud-sdk:emulators"
+    platform: linux/amd64
     container_name: firestore-emulator
-    command: >
-      gcloud beta emulators firestore start
-      --host-port=0.0.0.0:8084
+    command: |
+      gcloud beta emulators firestore start --host-port=${FIRESTORE_EMULATOR_HOST}
     ports:
       - "8084:8084"
     environment:
-      - FIRESTORE_PROJECT_ID=test-project
+      - FIRESTORE_EMULATOR_HOST=${FIRESTORE_EMULATOR_HOST}
+      - FIRESTORE_PROJECT_ID=${FIRESTORE_PROJECT_ID}
     volumes:
       - "firestore_data:/data"
     networks:
       - emulator-network
   pubsub-emulator:
-    image: "google/cloud-sdk:latest"
+    image: "google/cloud-sdk:emulators"
+    platform: linux/amd64
     container_name: pubsub-emulator
-    command: >
-      gcloud beta emulators pubsub start
-      --host-port=0.0.0.0:8085
+    command: |
+      gcloud beta emulators pubsub start --host-port=${PUBSUB_EMULATOR_HOST}
+      gcloud pubsub topics create ${PUBSUB_TOPIC_NAME}
+      gcloud pubsub subscriptions create ${PUBSUB_SUBSCRIPTION_NAME} --topic=${PUBSUB_TOPIC_NAME}
     ports:
       - "8085:8085"
     environment:
-      - PUBSUB_PROJECT_ID=test-project
+      - PUBSUB_EMULATOR_HOST=${PUBSUB_EMULATOR_HOST}
+      - PUBSUB_PROJECT_ID=${PUBSUB_PROJECT_ID}
+      - PUBSUB_SUBSCRIPTION_NAME=${PUBSUB_SUBSCRIPTION_NAME}
+      - PUBSUB_TOPIC_NAME=${PUBSUB_TOPIC_NAME}
     volumes:
       - "pubsub_data:/data"
     networks:
