@@ -20,15 +20,17 @@ export class BudgetNotificationService {
     this.slackChannel = slackChannel;
   }
 
-  private generateMonthKey(): string {
-    const now = new Date();
-    return `${now.getFullYear()}-${now.getMonth() + 1}`;
+  private generateMonthKey(date: Date): string {
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1; // add 1 because getUTCMonth() returns 0-11
+    return `${year}-${month}`;
   }
 
   async processNotification(pubsubData: BudgetNotification): Promise<string> {
-    const { budgetDisplayName, budgetAmount, costAmount } = pubsubData;
+    const { budgetDisplayName, budgetAmount, costAmount, costIntervalStart } = pubsubData;
     const currentThreshold = costAmount / budgetAmount;
-    const monthKey = this.generateMonthKey();
+    const date = new Date(costIntervalStart);
+    const monthKey = this.generateMonthKey(date);
 
     const notifiedThresholds = await this.repository.getNotifiedThresholds(
       monthKey,
